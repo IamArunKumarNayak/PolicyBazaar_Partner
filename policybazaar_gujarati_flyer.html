@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="gu">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Policybazaar Partner - Gujarati</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Gujarati:wght@400;600;700;900&display=swap');
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:'Noto Sans Gujarati',sans-serif;background:#fff;max-width:700px;margin:0 auto}
+  .flyer{width:100%;background:#fff;overflow:hidden}
+
+  /* HEADER */
+  .header{padding:16px 20px 10px;border-bottom:2px solid #eee;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px}
+  .logo-area{display:flex;flex-direction:column;gap:4px}
+  .logo-text{font-size:26px;font-weight:900;color:#003580;letter-spacing:-0.5px}
+  .logo-text span{color:#00b5e2}
+  .logo-pb{display:inline-flex;align-items:center;justify-content:center;width:32px;height:32px;background:#003580;color:#fff;border-radius:50%;font-size:13px;font-weight:700;margin-left:4px;vertical-align:middle}
+  .partner-badge{background:#003580;color:#fff;font-size:13px;font-weight:700;padding:4px 14px;border-radius:3px;display:inline-flex;align-items:center;gap:6px;margin-top:2px}
+  .partner-badge::before,.partner-badge::after{content:"—";color:#b0c4e0}
+  .tagline-right{text-align:right;font-size:14px;color:#003580;font-weight:600;line-height:1.5;font-style:italic}
+  .india-tag{font-size:11px;color:#555;margin-top:4px;letter-spacing:.3px}
+
+  /* HERO */
+  .hero{background:linear-gradient(135deg,#f0f6ff 0%,#e8f4ff 100%);padding:28px 24px 20px;text-align:center;border-bottom:3px solid #003580}
+  .hero-line1{font-size:20px;font-weight:700;color:#003580;margin-bottom:4px}
+  .hero-main{font-size:48px;font-weight:900;color:#003580;line-height:1.05;margin-bottom:6px}
+  .hero-main .highlight{color:#00b5e2}
+  .hero-sub{font-size:15px;color:#333;margin-top:8px;line-height:1.5}
+  .hero-sub span{color:#003580;font-weight:700}
+
+  /* TARGET SEGMENTS */
+  .segments{display:grid;grid-template-columns:1fr;gap:0;border-bottom:2px solid #eee}
+  .segment{display:flex;align-items:center;gap:14px;padding:14px 20px;border-bottom:1px solid #eee;background:#fff}
+  .segment:last-child{border-bottom:none}
+  .seg-icon{width:52px;height:52px;background:#003580;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+  .seg-icon svg{width:26px;height:26px;fill:#fff}
+  .seg-content{}
+  .seg-title{font-size:16px;font-weight:700;color:#003580;margin-bottom:2px}
+  .seg-desc{font-size:13px;color:#555;line-height:1.4}
+
+  /* WHY SECTION */
+  .why-section{padding:20px 20px 16px;background:#fff}
+  .section-title{font-size:16px;font-weight:700;color:#003580;margin-bottom:14px;text-align:center;border-bottom:2px solid #003580;padding-bottom:6px}
+  .benefits-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  .benefit-card{border:1.5px solid #d0e4f7;border-radius:8px;padding:12px;display:flex;align-items:flex-start;gap:10px}
+  .benefit-icon{width:36px;height:36px;background:#003580;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+  .benefit-icon svg{width:18px;height:18px;fill:#fff}
+  .benefit-title{font-size:13px;font-weight:700;color:#003580;margin-bottom:2px}
+  .benefit-desc{font-size:11px;color:#555;line-height:1.4}
+
+  /* HIGHLIGHTS BAR */
+  .highlights{display:grid;grid-template-columns:repeat(4,1fr);background:#f0f6ff;border-top:2px solid #003580;border-bottom:2px solid #003580}
+  .highlight-item{padding:12px 8px;text-align:center;border-right:1px solid #c5daf0}
+  .highlight-item:last-child{border-right:none}
+  .highlight-icon{font-size:22px;margin-bottom:4px}
+  .highlight-title{font-size:12px;font-weight:700;color:#003580;margin-bottom:2px}
+  .highlight-desc{font-size:10px;color:#555;line-height:1.3}
+
+  /* HOW IT WORKS */
+  .how-section{padding:18px 20px;background:#fff}
+  .steps{display:flex;align-items:flex-start;gap:0;margin-top:10px}
+  .step{flex:1;text-align:center;position:relative}
+  .step:not(:last-child)::after{content:"→";position:absolute;right:-12px;top:14px;font-size:18px;color:#003580;font-weight:700}
+  .step-num{width:36px;height:36px;background:#003580;color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:700;margin:0 auto 6px}
+  .step-icon{font-size:20px;margin-bottom:4px}
+  .step-title{font-size:12px;font-weight:700;color:#003580;margin-bottom:2px}
+  .step-desc{font-size:10px;color:#555;line-height:1.3}
+
+  /* CTA BOX */
+  .cta-box{background:#003580;color:#fff;padding:20px 24px;text-align:center;margin:0}
+  .cta-line1{font-size:18px;font-weight:700;margin-bottom:4px}
+  .cta-line2{font-size:15px;font-weight:600;margin-bottom:10px;color:#b0d4f7}
+  .cta-highlight{font-size:22px;font-weight:900;color:#ffd700;display:block;margin-bottom:4px}
+  .cta-url{font-size:13px;color:#90c8ff;margin-top:6px;text-decoration:underline}
+  .qr-row{display:flex;align-items:center;justify-content:center;gap:16px;margin-top:12px;flex-wrap:wrap}
+  .qr-box{width:80px;height:80px;background:#fff;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:9px;color:#003580;text-align:center;padding:4px;line-height:1.2}
+
+  /* CONTACT FOOTER */
+  .contact-footer{background:#002060;color:#fff;padding:14px 20px;display:flex;align-items:center;gap:16px;flex-wrap:wrap}
+  .contact-label{background:#ffd700;color:#002060;font-size:13px;font-weight:700;padding:6px 14px;border-radius:4px;white-space:nowrap}
+  .contact-info{flex:1}
+  .contact-name-label{font-size:11px;color:#90c8ff}
+  .contact-name{font-size:17px;font-weight:700}
+  .contact-phone-wrap{display:flex;align-items:center;gap:8px}
+  .contact-phone{font-size:18px;font-weight:700;color:#ffd700}
+
+  /* FOOTER STRIP */
+  .footer-strip{background:#003580;color:#fff;padding:10px 16px;display:flex;align-items:center;justify-content:space-around;flex-wrap:wrap;gap:8px}
+  .footer-strip-item{display:flex;align-items:center;gap:6px;font-size:11px;font-weight:600}
+  .footer-strip-item svg{width:16px;height:16px;fill:#fff}
+  .trust-badges{background:#001840;padding:8px 16px;display:flex;align-items:center;justify-content:space-around;flex-wrap:wrap;gap:6px}
+  .trust-badge{font-size:10px;color:#b0c4e0;display:flex;align-items:center;gap:4px}
+</style>
+</head>
+<body>
+<div class="flyer">
+
+  <!-- HEADER -->
+  <div class="header">
+    <div class="logo-area">
+      <div class="logo-text">policy<span>bazaar</span><span class="logo-pb">pb</span> <sup style="font-size:10px;color:#555">®</sup></div>
+      <div class="partner-badge">PARTNER</div>
+      <div class="india-tag">ભારતનું સૌથી મોટું વીમા બજાર</div>
+    </div>
+    <div class="tagline-right">
+      આપનું ઘર,<br>
+      આપની ઓળખ,<br>
+      આપની કમાઈ.
+    </div>
+  </div>
+
+  <!-- HERO -->
+  <div class="hero">
+    <div class="hero-line1">તમારો સમય ફેરવો</div>
+    <div class="hero-main">આ<span class="highlight">ર્થિક</span><br>સ્વ<span class="highlight">તંત્ર</span>તામાં</div>
+    <div class="hero-sub"><span>Policybazaar Partner</span> સાથે જોડાઓ અને<br>એક વિશ્વસ્નીય વીમા સલાહકાર બનો</div>
+  </div>
+
+  <!-- TARGET SEGMENTS -->
+  <div class="segments">
+    <div class="segment">
+      <div class="seg-icon">
+        <svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22" stroke="#fff" stroke-width="1.5" fill="none"/></svg>
+      </div>
+      <div class="seg-content">
+        <div class="seg-title">🏠 ગૃહિણી</div>
+        <div class="seg-desc">ઘરેથી કામ કરો · પોતાના બોસ બનો</div>
+      </div>
+    </div>
+    <div class="segment">
+      <div class="seg-icon">
+        <svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2" stroke="#fff" stroke-width="1.5" fill="none"/><circle cx="12" cy="7" r="4" stroke="#fff" stroke-width="1.5" fill="none"/></svg>
+      </div>
+      <div class="seg-content">
+        <div class="seg-title">🪑 નિવૃત્ત</div>
+        <div class="seg-desc">સક્રિય રહો · અનુભવથી કમાઓ</div>
+      </div>
+    </div>
+    <div class="segment">
+      <div class="seg-icon">
+        <svg viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="14" rx="2" stroke="#fff" stroke-width="1.5" fill="none"/><path d="M16 7V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v2" stroke="#fff" stroke-width="1.5" fill="none"/></svg>
+      </div>
+      <div class="seg-content">
+        <div class="seg-title">💼 સ્વ-રોજગાર</div>
+        <div class="seg-desc">આવક વધારો · ભવિષ્ય સુરક્ષિત કરો</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- WHY SECTION -->
+  <div class="why-section">
+    <div class="section-title">Policybazaar Partner કેમ બનવું?</div>
+    <div class="benefits-grid">
+      <div class="benefit-card">
+        <div class="benefit-icon">
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" stroke="#fff" stroke-width="1.5" fill="none"/><path d="M12 6v6l4 2" stroke="#fff" stroke-width="1.5" fill="none"/></svg>
+        </div>
+        <div>
+          <div class="benefit-title">આકર્ષક કમિશન</div>
+          <div class="benefit-desc">શૂન્ય રોકાણ સાથે ઉચ્ચ કમાણી</div>
+        </div>
+      </div>
+      <div class="benefit-card">
+        <div class="benefit-icon">
+          <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" stroke="#fff" stroke-width="1.5" fill="none"/></svg>
+        </div>
+        <div>
+          <div class="benefit-title">મફત તાલીમ</div>
+          <div class="benefit-desc">શીખો, વધો અને સાથે સફળ થાઓ</div>
+        </div>
+      </div>
+      <div class="benefit-card">
+        <div class="benefit-icon">
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" stroke="#fff" stroke-width="1.5" fill="none"/><path d="M12 8v4l3 3" stroke="#fff" stroke-width="1.5" fill="none"/></svg>
+        </div>
+        <div>
+          <div class="benefit-title">તમારી શરતો પર</div>
+          <div class="benefit-desc">ગમે ત્યાંથી કામ — સ્વ-સ્વ સ્વ</div>
+        </div>
+      </div>
+      <div class="benefit-card">
+        <div class="benefit-icon">
+          <svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2" stroke="#fff" stroke-width="1.5" fill="none"/><path d="M8 12l3 3 5-5" stroke="#fff" stroke-width="1.5" fill="none"/></svg>
+        </div>
+        <div>
+          <div class="benefit-title">વ્યાપક ઉત્પાદનો</div>
+          <div class="benefit-desc">જીવન, સ્વાસ્થ્ય, મોટર, પ્રવાસ</div>
+        </div>
+      </div>
+      <div class="benefit-card">
+        <div class="benefit-icon">
+          <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2" stroke="#fff" stroke-width="1.5" fill="none"/><circle cx="9" cy="7" r="4" stroke="#fff" stroke-width="1.5" fill="none"/><path d="M23 21v-2a4 4 0 00-3-3.87" stroke="#fff" stroke-width="1.5" fill="none"/><path d="M16 3.13a4 4 0 010 7.75" stroke="#fff" stroke-width="1.5" fill="none"/></svg>
+        </div>
+        <div>
+          <div class="benefit-title">વિશ્વસ્ત બ્રાન્ડ</div>
+          <div class="benefit-desc">ભારતના સૌથી વિશ્વસ્ત પ્લેટફોર્મ</div>
+        </div>
+      </div>
+      <div class="benefit-card">
+        <div class="benefit-icon">
+          <svg viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12" stroke="#fff" stroke-width="1.5" fill="none"/></svg>
+        </div>
+        <div>
+          <div class="benefit-title">અમર્યાદ કમાણી</div>
+          <div class="benefit-desc">તમારી મહેનત, તમારી આવક</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- HIGHLIGHTS BAR -->
+  <div class="highlights">
+    <div class="highlight-item">
+      <div style="font-size:22px;margin-bottom:3px">🚫</div>
+      <div class="highlight-title">કોઈ લક્ષ્ય નહીં</div>
+      <div class="highlight-desc">તમારી શરતો પ્રમાણે</div>
+    </div>
+    <div class="highlight-item">
+      <div style="font-size:22px;margin-bottom:3px">😌</div>
+      <div class="highlight-title">કોઈ દબાણ નહીં</div>
+      <div class="highlight-desc">સ્ટ્રેસ-ફ્રી, સ્વ-સ્વ</div>
+    </div>
+    <div class="highlight-item">
+      <div style="font-size:22px;margin-bottom:3px">₹0</div>
+      <div class="highlight-title">શૂન્ય રોકાણ</div>
+      <div class="highlight-desc">મફત શરૂ કરો</div>
+    </div>
+    <div class="highlight-item">
+      <div style="font-size:22px;margin-bottom:3px">📞</div>
+      <div class="highlight-title">24×7 સહાય</div>
+      <div class="highlight-desc">Policybazaar સદા સાથે</div>
+    </div>
+  </div>
+
+  <!-- HOW IT WORKS -->
+  <div class="how-section">
+    <div class="section-title">કઈ રીતે કામ કરે છે</div>
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">1</div>
+        <div class="step-icon">📋</div>
+        <div class="step-title">નોંધણી</div>
+        <div class="step-desc">ફક્ત થોડી મિનિટોમાં</div>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <div class="step-icon">🎓</div>
+        <div class="step-title">શીખો</div>
+        <div class="step-desc">મફત તાલીમ પૂર્ણ કરો</div>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <div class="step-icon">🤝</div>
+        <div class="step-title">શેર કરો</div>
+        <div class="step-desc">મિત્રો-પરિવારને ભલામણ</div>
+      </div>
+      <div class="step">
+        <div class="step-num">4</div>
+        <div class="step-icon">💰</div>
+        <div class="step-title">કમાઓ</div>
+        <div class="step-desc">આકર્ષક કમિશન મેળવો</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CTA BOX -->
+  <div class="cta-box">
+    <div class="cta-line1">પોતાના બોસ બનો · અસર ઊભી કરો</div>
+    <span class="cta-highlight">આજે જ શરૂ કરો!</span>
+    <div class="cta-line2">સ્કેન કરો અથવા મુલાકાત લો</div>
+    <div class="qr-row">
+      <div class="qr-box">QR સ્કેન<br>કરો<br>🔲</div>
+      <div style="text-align:left">
+        <div style="font-size:13px;color:#b0d4f7;margin-bottom:4px">અથવા વેબસાઇટ જુઓ:</div>
+        <div class="cta-url">partner.policybazaar.com</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- READY TO START -->
+  <div style="background:#001840;color:#fff;text-align:center;padding:10px 16px;font-size:13px;font-weight:600;letter-spacing:.3px">
+    શું તમે Policybazaar સાથે તમારી સફર શરૂ કરવા તૈયાર છો?
+  </div>
+
+  <!-- CONTACT FOOTER -->
+  <div class="contact-footer">
+    <div class="contact-label">📞 સંપર્ક</div>
+    <div class="contact-info">
+      <div class="contact-name-label">વરિષ્ઠ સંબંધ વ્યવસ્થાપક</div>
+      <div class="contact-name">ARUN KUMAR NAYAK</div>
+    </div>
+    <div class="contact-phone-wrap">
+      <span style="font-size:20px">📱</span>
+      <div class="contact-phone">8690875750</div>
+    </div>
+  </div>
+
+  <!-- FOOTER STRIP -->
+  <div class="footer-strip">
+    <div class="footer-strip-item">
+      <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+      સુરક્ષિત જીવન
+    </div>
+    <div class="footer-strip-item">
+      <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>
+      વિશ્વાસ કમાઓ
+    </div>
+    <div class="footer-strip-item">
+      <svg viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+      ભવિષ્ય બનાવો
+    </div>
+  </div>
+
+  <!-- TRUST BADGES -->
+  <div class="trust-badges">
+    <div class="trust-badge">⭐ કરોડો દ્વારા વિશ્વસ્ત</div>
+    <div class="trust-badge">💻 100% ડિજિટલ</div>
+    <div class="trust-badge">✅ નિયમન અને અનુપાલિત</div>
+  </div>
+
+</div>
+</body>
+</html>
