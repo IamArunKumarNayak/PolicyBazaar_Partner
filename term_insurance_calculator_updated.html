@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Term Insurance Premium Calculator</title>
+<style>
+  :root { color-scheme: light; --ink:#172033; --muted:#65718a; --brand:#175cd3; --line:#dce3ef; --bg:#f4f7fb; }
+  * { box-sizing:border-box; }
+  body { margin:0; padding:24px 14px; background:var(--bg); color:var(--ink); font:16px/1.5 system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif; }
+  main { max-width:760px; margin:0 auto; background:#fff; border:1px solid var(--line); border-radius:18px; padding:clamp(18px,4vw,32px); box-shadow:0 10px 32px rgba(20,40,80,.07); }
+  h1 { margin:0 0 6px; font-size:clamp(1.5rem,4vw,2rem); }
+  .intro { margin:0 0 24px; color:var(--muted); }
+  .grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:16px; }
+  label { display:block; font-weight:650; font-size:.92rem; margin-bottom:6px; }
+  input,select { width:100%; padding:12px; border:1px solid #c8d2e2; border-radius:10px; background:#fff; color:var(--ink); font:inherit; }
+  input:focus,select:focus { outline:3px solid #cfe0ff; border-color:var(--brand); }
+  .full { grid-column:1/-1; }
+  .actions { display:flex; gap:10px; flex-wrap:wrap; margin-top:20px; }
+  button { border:0; border-radius:10px; padding:12px 18px; font:inherit; font-weight:700; cursor:pointer; }
+  .primary { background:var(--brand); color:#fff; }
+  .secondary { background:#eaf0fa; color:#18345f; }
+  .results { margin-top:24px; padding:20px; border-radius:14px; background:#f0f5ff; border:1px solid #d5e3ff; }
+  .results h2 { margin:0 0 14px; font-size:1.15rem; }
+  .result-grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:14px; }
+  .metric { background:#fff; border-radius:10px; padding:14px; }
+  .metric span { display:block; color:var(--muted); font-size:.86rem; }
+  .metric strong { display:block; margin-top:4px; font-size:1.3rem; overflow-wrap:anywhere; }
+  .note { color:var(--muted); font-size:.88rem; margin:16px 0 0; }
+  @media(max-width:560px) { .grid,.result-grid { grid-template-columns:1fr; } .full { grid-column:auto; } }
+  @media print { body { background:#fff; padding:0; } main { box-shadow:none; border:0; } .actions { display:none; } }
+</style>
+</head>
+<body>
+<main>
+  <h1>Term Insurance Premium Calculator</h1>
+  <p class="intro">Reusable estimate tool. Enter the insurer's premium rate to calculate an illustrative premium.</p>
+  <form id="calcForm">
+    <div class="grid">
+      <div><label for="age">Age (years)</label><input id="age" type="number" min="18" max="100" value="30" required></div>
+      <div><label for="gender">Gender</label><select id="gender"><option>Not specified</option><option>Male</option><option>Female</option><option>Other</option></select></div>
+      <div><label for="smoking">Smoking status</label><select id="smoking"><option>Non-smoker</option><option>Smoker</option></select></div>
+      <div><label for="term">Policy term (years)</label><input id="term" type="number" min="1" max="85" value="30" required></div>
+      <div><label for="cover">Sum assured (₹) — ₹25 lakh to ₹5 crore</label><input id="cover" type="number" min="2500000" max="50000000" step="1" value="10000000" required></div>
+      <div><label for="rate">Annual rate per ₹1,000 of cover (₹)</label><input id="rate" type="number" min="0" step="0.01" value="8" required></div>
+      <div><label for="frequency">Payment frequency</label><select id="frequency"><option value="annual">Annual</option><option value="half">Half-yearly</option><option value="quarter">Quarterly</option><option value="monthly">Monthly</option></select></div>
+      <div><label for="tax">Tax / loading (%)</label><input id="tax" type="number" min="0" max="100" step="0.01" value="0" required></div>
+    </div>
+    <div class="actions"><button class="primary" type="submit">Calculate premium</button><button class="secondary" type="button" id="reset">Reset</button><button class="secondary" type="button" onclick="window.print()">Print / Save PDF</button></div>
+  </form>
+  <section class="results" aria-live="polite">
+    <h2>Estimated premium</h2>
+    <div class="result-grid">
+      <div class="metric"><span>Annual base premium</span><strong id="annual">₹80,000.00</strong></div>
+      <div class="metric"><span>Annual total (incl. entered tax/loading)</span><strong id="annualTotal">₹80,000.00</strong></div>
+      <div class="metric"><span>Selected payment amount</span><strong id="periodic">₹80,000.00</strong></div>
+      <div class="metric"><span>Total over full term (illustrative)</span><strong id="total">₹24,00,000.00</strong></div>
+    </div>
+    <p class="note" id="summary">Based on the entered rate and assumptions.</p>
+  </section>
+  <p class="note"><strong>Important:</strong> This is a simplified rate-based estimator, not an actuarial quote. The rate is not inferred from age, gender, smoking status, or policy term. Actual insurer premiums can differ and may include payment-mode factors, underwriting, riders, GST, and other charges. Enter a rate supplied by the insurer for a meaningful estimate. Tax/loading is a user-entered percentage and may not represent applicable GST.</p>
+</main>
+<script>
+(() => {
+  const $ = id => document.getElementById(id);
+  const money = value => new Intl.NumberFormat('en-IN',{style:'currency',currency:'INR',maximumFractionDigits:2,minimumFractionDigits:2}).format(value);
+  function calculate(event) {
+    if (event) event.preventDefault();
+    const age = Number($('age').value), term = Number($('term').value), cover = Number($('cover').value), rate = Number($('rate').value), tax = Number($('tax').value);
+    if (!Number.isFinite(age) || age < 18 || age > 100 || !Number.isFinite(term) || term < 1 || age + term > 120 || cover < 2500000 || cover > 50000000 || rate < 0 || tax < 0 || tax > 100) {
+      alert('Please check your entries. Age must be 18–100, term must be positive, and age + term cannot exceed 120.'); return;
+    }
+    const annual = cover / 1000 * rate;
+    const annualTotal = annual * (1 + tax / 100);
+    const freq = $('frequency').value;
+    const count = {annual:1,half:2,quarter:4,monthly:12}[freq];
+    const periodic = annualTotal / count;
+    $('annual').textContent = money(annual);
+    $('annualTotal').textContent = money(annualTotal);
+    $('periodic').textContent = money(periodic) + (count > 1 ? ` × ${count} payments/year` : '');
+    $('total').textContent = money(periodic * count * term);
+    $('summary').textContent = `Age ${age} • ${$('gender').value} • ${$('smoking').value} • Cover ${money(cover)} • ${term}-year term • Rate ₹${rate.toFixed(2)} per ₹1,000 • ${count} payment(s) per year. Total assumes the same premium every year and excludes future rate changes.`;
+  }
+  $('calcForm').addEventListener('submit', calculate);
+  $('reset').addEventListener('click', () => { $('calcForm').reset(); calculate(); });
+  calculate();
+})();
+</script>
+</body>
+</html>
